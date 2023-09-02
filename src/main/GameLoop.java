@@ -14,40 +14,28 @@ public class GameLoop
         gameLoop();
     }
 
-    public static void ganhador(char letra)
-    {
-        switch (letra)
-        {
-            case 'X' -> System.out.println("O jogador 1 Venceu!!!!!!!");
-            case 'O' -> System.out.println("O jogador 2 Venceu!!!!!!!");
-        }
-    }
-
-    public static void gameLoop()
+    private static void gameLoop()
     {
         for (byte round = 0; round <= 9; round++)
         {
-            if (round == 9)
+            if (validarMatriz.empate(round))
             {
                 matriz.desenharMatriz();
-                System.out.println("EMPATE.");
+                System.out.println("O jogo E M P A T O U !!!");
+                break;
             }
+            
+            matriz.desenharMatriz();
+            matriz.atualizarMatriz(jogadores.obterJogadorAtual());
 
-            else
+            if (validarMatriz.validarMatriz(matriz, jogadores.obterJogadorAtual()))
             {
-                char jogadorDaVez = jogadores.getJogadorAtual();
-                jogadores.setJogador();
                 matriz.desenharMatriz();
-                matriz.setMatriz(jogadorDaVez);
-
-                if (validarMatriz.Validar(matriz.getMatriz(), jogadorDaVez))
-                {
-
-                    matriz.desenharMatriz();
-                    ganhador(jogadorDaVez);
-                    break;
-                }
+                System.out.println(jogadores.mostrarGanhador(jogadores.obterJogadorAtual()));
+                break;
             }
+
+            jogadores.trocarJogador();
         }
     }
 }

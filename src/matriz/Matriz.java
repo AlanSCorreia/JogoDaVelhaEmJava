@@ -5,15 +5,20 @@ import jogadores.Jogadores;
 public class Matriz
 {
     private static final Jogadores jogadores = new Jogadores();
-    private final char[][] matriz = {
+    private char[][] matriz = {
             {' ', ' ', ' '},
             {' ', ' ', ' '},
             {' ', ' ', ' '}
     };
 
-    public char[][] getMatriz()
+    public char[][] obterMatriz()
     {
         return matriz;
+    }
+
+     public char obterPosicao(int linha, int coluna)
+    {
+        return matriz[linha][coluna];
     }
 
     public void desenharMatriz()
@@ -30,14 +35,14 @@ public class Matriz
         System.out.println("||=||=||=||\n");
     }
 
-    public void setMatriz(char letra)
+    public void atualizarMatriz(char jogador)
     {
         do {
-            byte[] posDaJogada = jogadores.setElemento();
+            byte[] posDaJogada = jogadores.receberElemento();
 
             if (matriz[posDaJogada[0] - 1][posDaJogada[1] - 1] == ' ')
             {
-                matriz[posDaJogada[0] - 1][posDaJogada[1] - 1] = letra;
+                matriz[posDaJogada[0] - 1][posDaJogada[1] - 1] = jogador;
                 break;
             }
 

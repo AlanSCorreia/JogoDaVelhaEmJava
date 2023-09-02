@@ -6,18 +6,17 @@ public class Jogadores
 {
     private char jogadorAtual = 'X';
 
-    public char getJogadorAtual()
+    public char obterJogadorAtual()
     {
         return jogadorAtual;
     }
 
-    public byte[] setElemento()
+    public byte[] receberElemento()
     {
         byte linha;
         byte coluna;
 
         Scanner scanner = new Scanner(System.in);
-
         do {
             System.out.print("Escolha uma linha entre [ 1 / 2 / 3]: ");
             linha = scanner.nextByte();
@@ -41,12 +40,19 @@ public class Jogadores
         return new byte[]{linha, coluna};
     }
 
-    public void setJogador()
+    public void trocarJogador()
     {
         switch (jogadorAtual)
         {
             case 'X' -> jogadorAtual = 'O';
             case 'O' -> jogadorAtual = 'X';
         }
+    }
+
+    public String mostrarGanhador(char letra)
+    {
+        return (jogadorAtual == 'X')
+                ? "O jogador 1 Venceu!!!!!!!"
+                : "O jogador 2 Venceu!!!!!!!";
     }
 }

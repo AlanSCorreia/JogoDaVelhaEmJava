@@ -2,32 +2,58 @@ package matriz;
 
 public class ValidarMatriz
 {
-    public boolean diagonalDireita(char[][] matriz, char letra)
+    private boolean diagonalEsquerda(Matriz matriz, char jogador)
     {
-        return ((matriz[0][0] == matriz[1][1]) && (matriz[1][1] == matriz[2][2]) && (matriz[2][2] == letra));
+        return ((matriz.obterPosicao(0, 0) == matriz.obterPosicao(1, 1))
+                && (matriz.obterPosicao(1, 1) == matriz.obterPosicao(2, 2))
+                && (matriz.obterPosicao(2, 2) == jogador));
     }
 
-    public boolean diagonalEsquerda(char[][] matriz, char letra)
+    private boolean diagonalDireita(Matriz matriz, char jogador)
     {
-        return ((matriz[2][0] == matriz[1][1]) && (matriz[1][1] == matriz[0][2]) && (matriz[0][2] == letra));
+        return (matriz.obterPosicao(2, 0) == matriz.obterPosicao(1, 1)
+                && (matriz.obterPosicao(1, 1) == matriz.obterPosicao(0, 2))
+                && (matriz.obterPosicao(0, 2) == jogador));
     }
 
-    public boolean linhasEColunas(char[][] matriz, char letra)
+    private boolean linhas(Matriz matriz, char jogador)
     {
-        for (int x = 0; x < 3; x++)
+        for (int x = 0; x < 3;x++)
         {
-            if (((matriz[x][0] == matriz[x][1]) && (matriz[x][1] == matriz[x][2]) && (matriz[x][2] == letra)) |
-                    ((matriz[0][x] == matriz[1][x]) && (matriz[1][x] == matriz[2][x]) && (matriz[2][x] == letra)))
+            if ((matriz.obterPosicao(x, 0) == matriz.obterPosicao(x, 1))
+                && (matriz.obterPosicao(x, 1) == matriz.obterPosicao(x, 2))
+                && (matriz.obterPosicao(x, 2) == jogador))
             {
                 return true;
             }
         }
-
         return false;
     }
 
-    public boolean Validar(char[][] matriz, char letra)
+    private boolean colunas(Matriz matriz, char jogador)
     {
-        return diagonalDireita(matriz, letra) || diagonalEsquerda(matriz, letra) || linhasEColunas(matriz, letra);
+        for (int x = 0; x < 3; x++)
+        {
+            if ((matriz.obterPosicao(0, x) == matriz.obterPosicao(1, x))
+                && (matriz.obterPosicao(1, x) == matriz.obterPosicao(2, x))
+                && (matriz.obterPosicao(2, x) == jogador))
+            {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public boolean validarMatriz(Matriz matriz, char jogador)
+    {
+        return diagonalEsquerda(matriz, jogador) ||
+                diagonalDireita(matriz, jogador) ||
+                linhas(matriz, jogador) ||
+                colunas(matriz, jogador);
+    }
+
+    public boolean empate(byte round)
+    {
+        return round == 9;
     }
 }

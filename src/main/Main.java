@@ -6,10 +6,3 @@ public class Main {
         GameLoop gameLoop = new GameLoop();
     }
 }
-
-/*
-* rodar num for loop de 9 rodadas, caso ninguem ganhe antes do final das rodadas é empate
-* não permmitir a mudança de valores nas celulas
-*
-*
-* */
